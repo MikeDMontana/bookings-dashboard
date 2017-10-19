@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import dataset from './capacity_and_booking_lead_time.json';
 import TourHasBeenSelected from './TourHasBeenSelected';
+import SetSummaryStats from './SetSummaryStats';
 
 class TourSelection extends Component {
   constructor(props) {
@@ -9,13 +10,15 @@ class TourSelection extends Component {
 
     this.state={
       selectedTour: "",
-      selectedTourFlag: false
+      selectedTourFlag: false,
+      dataset: dataset,
+      currentSummaryStats: {}
     };
   }
 
   tourDropdownOptions = () => {
     return (<select className="selectTourDropdown" onChange={this.tourSelectionChange}>
-      {Object.keys(dataset).map((tourName) =>
+      {Object.keys(this.state.dataset).map((tourName) =>
       <option key={tourName} value={tourName}>{tourName}</option>
     )}
     </select>
@@ -26,7 +29,8 @@ class TourSelection extends Component {
     const selectedTour = event.target.value;
     this.setState({
       selectedTour: selectedTour,
-      selectedTourFlag: true
+      selectedTourFlag: true,
+      currentSummaryStats: this.state.dataset[selectedTour]['Summary Statistics']
     });
   }
 
@@ -34,9 +38,11 @@ class TourSelection extends Component {
     return (
       <div>
         {this.tourDropdownOptions()}
-        {console.log(dataset)}
-        {console.log(dataset[this.state.selectedTour])}
-        {this.state.selectedTourFlag && <TourHasBeenSelected selectedTour={this.state.selectedTour} />}
+        {this.state.selectedTourFlag && <TourHasBeenSelected dataset={this.state.dataset} selectedTour={this.state.selectedTour} />}
+        <SetSummaryStats
+          currentSummaryStats={this.state.currentSummaryStats}
+          selectedTour={this.state.selectedTour}
+        />
       </div>
     );
   }

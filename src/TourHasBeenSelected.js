@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import dataset from './capacity_and_booking_lead_time.json';
-import TimeHasBeenSelected from './TimeHasBeenSelected';
+import SetSummaryStats from './SetSummaryStats';
 
 class TourHasBeenSelected extends Component {
   constructor(props) {
@@ -9,13 +8,13 @@ class TourHasBeenSelected extends Component {
 
     this.state={
       departureTimeOptions: {},
-      selectedTimeFlag: false
+      selectedTimeFlag: false,
     };
   }
 
   componentDidMount() {
     this.setState({
-      departureTimeOptions: dataset[this.props.selectedTour]['Departure Time']
+      departureTimeOptions: this.props.dataset[this.props.selectedTour]['Departure Time']
     });
   }
 
@@ -42,8 +41,7 @@ class TourHasBeenSelected extends Component {
     return (
       <div>
       {this.timeDropdownOptions()}
-      {console.log(this.state.departureTimeOptions['01:00pm'])}
-      {this.state.selectedTimeFlag && <TimeHasBeenSelected selectedTime={this.state.selectedTime} /> }
+      {console.log(this.state.departureTimeOptions[this.state.selectedTime])}
       </div>
     );
   }
