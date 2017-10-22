@@ -1,30 +1,16 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import ProgressArc from './ProgressArc';
+// import ProgressArc from './ProgressArc';
+import Histogram from './Histogram';
 
 class SetSummaryStats extends Component {
   constructor(props) {
     super(props);
-  }
 
-  // parseStatsForArc = () => {
-  //   return (<div>
-  //     {Object.keys(this.props.currentSummaryStats).map((tourStat) =>
-  //       <ProgressArc
-  //         height={300}
-  //         width={300}
-  //         innerRadius={100}
-  //         outerRadius={110}
-  //         id="d3-arc"
-  //         backgroundColor='#e6e6e6'
-  //         foregroundColor='#00ff00'
-  //         duration={2000}
-  //         percentComplete={this.props.currentSummaryStats[tourStat]}
-  //       />
-  //   )}
-  //   </div>
-  //   );
-  // }
+    this.state={
+      barprops: {}
+    }
+  }
 
   render() {
     if (Object.keys(this.props.currentSummaryStats).length !== 4 && this.props.selectedTour.length > 1) {
@@ -37,17 +23,15 @@ class SetSummaryStats extends Component {
     console.log(this.props.currentSummaryStats);
     return (
       <div>
-        <ProgressArc
-            height={300}
-            width={300}
-            innerRadius={100}
-            outerRadius={110}
-            id="d3-arc"
-            backgroundColor='#e6e6e6'
-            foregroundColor='#00ff00'
-            duration={2000}
-            percentComplete={this.props.currentSummaryStats['Average Capacity']}
-          />
+        <Histogram  bins={10}
+                    width={500}
+                    height={500}
+                    x="500"
+                    y="10"
+                    data={1,2,3,4,5,6,7,8,9}
+                    axisMargin={83}
+                    bottomMargin={5}
+                    value={5}
       </div>
     );
   }
