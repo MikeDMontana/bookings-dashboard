@@ -5,10 +5,18 @@ class TourHasBeenSelected extends Component {
   constructor(props) {
     super(props);
     this.timeSelectionChange = this.timeSelectionChange.bind(this);
+    this.createDataArrays = this.createDataArrays.bind(this);
 
     this.state={
       departureTimeOptions: {},
       selectedTimeFlag: false,
+      dayOfWeek: {},
+      monthOfYear: {},
+      weekOfYear: {},
+      dayOfWeekArr: [],
+      monthOfYearArr: [],
+      weekOfYearArr: [],
+      selectedTime: {}
     };
   }
 
@@ -31,17 +39,29 @@ class TourHasBeenSelected extends Component {
     const selectedTime = event.target.value;
     this.setState({
       selectedTime: selectedTime,
-      selectedTimeFlag: true
+      selectedTimeFlag: true,
+      dayOfWeek: this.state.departureTimeOptions[selectedTime]['Day of Week'],
+      monthOfYear: this.state.departureTimeOptions[selectedTime]['Month of Year'],
+      weekOfYear: this.state.departureTimeOptions[selectedTime]['Week of Year']
     });
   }
 
-
+  createDataArrays = () => {
+    this.state.dayOfWeekArr = [];
+    for (let key in this.state.dayOfWeek) {
+      let newObj = {[key]:this.state.dayOfWeek[key]}
+      this.state.dayOfWeekArr.push(newObj);
+    }
+  }
 
   render() {
     return (
       <div>
       {this.timeDropdownOptions()}
+      {this.createDataArrays()}
       {console.log(this.state.departureTimeOptions[this.state.selectedTime])}
+      {console.log(this.state.dayOfWeek)}
+      {console.log(this.state.dayOfWeekArr)}
       </div>
     );
   }

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import * as d3 from 'd3';
-// import ProgressArc from './ProgressArc';
 import Histogram from './Histogram';
 
 class SetSummaryStats extends Component {
@@ -8,33 +6,76 @@ class SetSummaryStats extends Component {
     super(props);
 
     this.state={
-      barprops: {}
+      filteredSalaries: []
     }
   }
 
+  componentDidMount() {
+    const filteredSalaries = [
+        { x0: 17530,
+          x1: 20000,
+          base_salary: 59140
+        },
+        { x0: 13000,
+          x1: 15000,
+          base_salary: 30000
+        },
+        { x0: 40000,
+          x1: 23200,
+          base_salary: 22000
+        },
+        { x0: 12530,
+          x1: 40000,
+          base_salary: 50000
+        },
+        { x0: 19530,
+          x1: 33000,
+          base_salary: 27140
+        },
+        { x0: 10230,
+          x1: 29000,
+          base_salary: 49140
+        },
+        { x0: 11530,
+          x1: 19000,
+          base_salary: 59140
+        },
+        { x0: 13530,
+          x1: 22500,
+          base_salary: 69140
+        },
+        { x0: 11530,
+          x1: 30000,
+          base_salary: 46040
+        },
+        { x0: 12530,
+          x1: 35000,
+          base_salary: 69140
+        }
+    ];
+    this.setState({filteredSalaries:filteredSalaries});
+  }
+
   render() {
-    if (Object.keys(this.props.currentSummaryStats).length !== 4 && this.props.selectedTour.length > 1) {
-      return (
-        <div>
-        Sorry No Summary Stats For That Tour Selection
-        </div>
-      );
-    }
-    console.log(this.props.currentSummaryStats);
     return (
-      <div>
+    <div className="App">
+      <svg width="1100" height="500">
         <Histogram  bins={10}
                     width={500}
                     height={500}
                     x="500"
-                    y="10"
-                    data={1,2,3,4,5,6,7,8,9}
+                    y="100"
+                    data={this.state.filteredSalaries}
                     axisMargin={83}
-                    bottomMargin={5}
-                    value={5}
+                    bottomMargin={15}
+                    value={d => d.base_salary}
+      />
+      </svg>
       </div>
     );
   }
 }
+
+
 
 export default SetSummaryStats;

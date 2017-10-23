@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import dataset from './capacity_and_booking_lead_time.json';
-import TourHasBeenSelected from './TourHasBeenSelected';
 import SetSummaryStats from './SetSummaryStats';
+import TourHasBeenSelected from './TourHasBeenSelected';
 
 class TourSelection extends Component {
   constructor(props) {
@@ -42,6 +42,7 @@ class TourSelection extends Component {
         <SetSummaryStats
           currentSummaryStats={this.state.currentSummaryStats}
           selectedTour={this.state.selectedTour}
+          dataset={this.state.dataset}
         />
       </div>
     );
