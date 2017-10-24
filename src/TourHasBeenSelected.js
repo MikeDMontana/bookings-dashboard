@@ -49,7 +49,7 @@ class TourHasBeenSelected extends Component {
   createDataArrays = () => {
     this.state.dayOfWeekArr = [];
     for (let key in this.state.dayOfWeek) {
-      let newObj = {[key]:this.state.dayOfWeek[key]}
+      let newObj = this.state.dayOfWeek[key];
       this.state.dayOfWeekArr.push(newObj);
     }
   }

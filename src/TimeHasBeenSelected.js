@@ -1,82 +1,89 @@
 import React, { Component } from 'react';
-import Histogram from './Histogram';
+import * as d3 from 'd3';
+
+const data = [
+{town: 'Macondo', pop: 24},
+{town: 'Wonderland', pop: 47},
+{town: 'Oz', pop: 66},
+{town: 'Gondor', pop: 17}
+];
+
+// define dimensions of svg
+const svgWidth = 500;  // width of entire svg
+const svgHeight = 500; // height of svg
+const textWidth = 115; // width of text section
+const textGutter = 7; // text/bar spacing
+const barMargin = 2; // bottom margin for bars
+const defaultColor = '#6497ea'; // default bar color
+const altColor = '#bc4545'; // alternative bar color
+
+// any population larger than this is considered big
+const popThreshold = 50;
+
+const barHeight = 40;
+
 
 class TimeHasBeenSelected extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state={
-      filteredSalaries: []
-    }
-  }
+  // Get scales using d3 linear scales
+  xScale = d3.scaleLinear()
+      .domain([0, 100])
+      .range([textWidth, svgWidth - textWidth]);
 
-  componentDidMount() {
-    const filteredSalaries = [
-        { x0: 17530,
-          x1: 20000,
-          base_salary: 59140
-        },
-        { x0: 13000,
-          x1: 15000,
-          base_salary: 30000
-        },
-        { x0: 40000,
-          x1: 23200,
-          base_salary: 22000
-        },
-        { x0: 12530,
-          x1: 40000,
-          base_salary: 50000
-        },
-        { x0: 19530,
-          x1: 33000,
-          base_salary: 27140
-        },
-        { x0: 10230,
-          x1: 29000,
-          base_salary: 49140
-        },
-        { x0: 11530,
-          x1: 19000,
-          base_salary: 59140
-        },
-        { x0: 13530,
-          x1: 22500,
-          base_salary: 69140
-        },
-        { x0: 11530,
-          x1: 30000,
-          base_salary: 46040
-        },
-        { x0: 12530,
-          x1: 35000,
-          base_salary: 69140
-        }
-    ];
-    this.setState({filteredSalaries:filteredSalaries});
-  }
+  yScale = d3.scaleLinear()
+      .domain([0, 10])  //instead of 10, this was this.props.dayOfWeekArr.length
+      .range([0, svgHeight]);
 
-  render() {
-    {console.log(this.props.dayOfWeekArr)}
+  // get bar height
+  renderBar = (datum, index) => {
+    // props for town name
+    const textProps = {
+      x: textWidth - textGutter,
+      y: this.yScale(index) + barMargin + barHeight / 2,
+      textAnchor: 'end',
+    };
+
+    // props for population bars
+    const barProps = {
+      x: textWidth,
+      y: this.yScale(index),
+      width: this.xScale(datum['Average Capacity']),
+      height: barHeight,
+      fill: datum['Average Capacity'] < popThreshold
+                ? defaultColor
+                : altColor,
+      rx: 5,
+      ry: 5,
+    };
+
+    // props for numbers on end
+    const numberProps = {
+      x: textWidth + this.xScale(datum['Average Capacity']) - textGutter,
+      y: this.yScale(index) + barMargin + barHeight / 2,
+      textAnchor: 'end',
+    };
+    console.log(this.xScale(datum['Average Capacity']));
+
+    // Be way of making changes below here!
     return (
-    <div className="App">
-      <svg width="1100" height="500">
-        <Histogram  bins={10}
-                    width={500}
-                    height={500}
-                    x="500"
-                    y="100"
-                    data={this.state.filteredSalaries}
-                    axisMargin={83}
-                    bottomMargin={15}
-                    value={d => d.base_salary}
-      />
+    <g key={index}>
+        <text {...textProps}>text here</text>
+        <rect {...barProps}/>
+        <text {...numberProps}>{datum['Average Capcity']}</text>
+    </g>
+    );
+  }; // end of renderBar function
+
+
+// function to render a bar for given element of dayOfWeekArr array
+  render() {
+    console.log(this.props.dayOfWeekArr);
+    return (
+      <svg width={svgWidth} height={svgHeight}>
+        {this.props.dayOfWeekArr.map(this.renderBar)}
       </svg>
-      </div>
     );
   }
 }
-
-
 
 export default TimeHasBeenSelected;
