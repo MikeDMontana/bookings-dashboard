@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Histogram from './Histogram';
 
-class SetSummaryStats extends Component {
+class TimeHasBeenSelected extends Component {
   constructor(props) {
     super(props);
 
@@ -57,6 +57,7 @@ class SetSummaryStats extends Component {
   }
 
   render() {
+    {console.log(this.props.dayOfWeekArr)}
     return (
     <div className="App">
       <svg width="1100" height="500">
@@ -78,4 +79,4 @@ class SetSummaryStats extends Component {
 
 
 
-export default SetSummaryStats;
+export default TimeHasBeenSelected;

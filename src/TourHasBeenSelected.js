@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SetSummaryStats from './SetSummaryStats';
+import TimeHasBeenSelected from './TimeHasBeenSelected';
 
 class TourHasBeenSelected extends Component {
   constructor(props) {
@@ -59,6 +59,12 @@ class TourHasBeenSelected extends Component {
       <div>
       {this.timeDropdownOptions()}
       {this.createDataArrays()}
+      <TimeHasBeenSelected
+        currentSummaryStats={this.state.currentSummaryStats}
+        selectedTour={this.state.selectedTour}
+        dataset={this.state.dataset}
+        dayOfWeekArr={this.state.dayOfWeekArr}
+      />
       {console.log(this.state.departureTimeOptions[this.state.selectedTime])}
       {console.log(this.state.dayOfWeek)}
       {console.log(this.state.dayOfWeekArr)}

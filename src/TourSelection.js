@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import dataset from './capacity_and_booking_lead_time.json';
-import SetSummaryStats from './SetSummaryStats';
+import TimeHasBeenSelected from './TimeHasBeenSelected';
 import TourHasBeenSelected from './TourHasBeenSelected';
 
 class TourSelection extends Component {
@@ -39,11 +39,6 @@ class TourSelection extends Component {
       <div>
         {this.tourDropdownOptions()}
         {this.state.selectedTourFlag && <TourHasBeenSelected dataset={this.state.dataset} selectedTour={this.state.selectedTour} />}
-        <SetSummaryStats
-          currentSummaryStats={this.state.currentSummaryStats}
-          selectedTour={this.state.selectedTour}
-          dataset={this.state.dataset}
-        />
       </div>
     );
   }
