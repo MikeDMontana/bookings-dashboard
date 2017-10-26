@@ -88,8 +88,8 @@ class ProgressArc extends Component {
 
   render() {
     return (
-      <div ref="arc">
-
+      <div className="arc" ref="arc">
+        <div className="arcTitle"><h2><span className="radialPercentage">{Math.round(this.props.percentComplete * 100)}%</span><br />Average Capacity</h2></div>
       </div>
     );
   }
