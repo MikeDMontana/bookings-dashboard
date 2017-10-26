@@ -68,6 +68,7 @@ class TourHasBeenSelected extends Component {
   }
 
   render() {
+    console.log(this.props.currentSummaryStats);
     return (
       <div>
         {this.timeDropdownOptions()}

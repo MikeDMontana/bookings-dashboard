@@ -20,6 +20,14 @@ class TimeHasBeenSelected extends Component {
     super(props);
   }
 
+  componentDidUpdate() {
+    return (
+      <svg width={svgWidth} height={svgHeight}>
+        {this.props.dayOfWeekArr.map(this.renderBar)}
+      </svg>
+    );
+  }
+
   // Get scales using d3 linear scales
   xScale = d3.scaleLinear()
       .domain([0, 20])
