@@ -12,7 +12,7 @@ class ProgressArc extends Component {
     outerRadius: PropTypes.number,
     backgroundColor: PropTypes.string,
     foregroundColor: PropTypes.string,
-    data: PropTypes.array
+    percentComplete: PropTypes.number
   }
 
   componentDidMount() {
@@ -33,7 +33,7 @@ class ProgressArc extends Component {
   updatePercent(context) {
     return this.setForeground(context).transition()
       .duration(this.props.duration)
-      .call(this.arcTween, this.tau * this.props.data, this.arc());
+      .call(this.arcTween, this.tau * this.props.percentComplete, this.arc());
   }
 
   arcTween(transition, newAngle, arc) {

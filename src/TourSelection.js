@@ -38,7 +38,11 @@ class TourSelection extends Component {
     return (
       <div>
         {this.tourDropdownOptions()}
-        {this.state.selectedTourFlag && <TourHasBeenSelected dataset={this.state.dataset} selectedTour={this.state.selectedTour} />}
+        {this.state.selectedTourFlag && <TourHasBeenSelected
+                                          dataset={this.state.dataset}
+                                          selectedTour={this.state.selectedTour}
+                                          currentSummaryStats={this.state.currentSummaryStats
+                                          } />}
       </div>
     );
   }
