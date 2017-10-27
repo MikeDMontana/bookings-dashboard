@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 
 // define dimensions of svg
-const svgWidth = 700;  // width of entire svg
-const svgHeight = 500; // height of svg
+const svgWidth = 400;  // width of entire svg
+const svgHeight = 400; // height of svg
 const textWidth = 115; // width of text section
-const textGutter = 7; // text/bar spacing
-const barMargin = 2; // bottom margin for bars
-const defaultColor = '#6497ea'; // default bar color
+const textGutter = 10; // text/bar spacing
+const barMargin = 6; // bottom margin for bars
+const defaultColor = 'lightgray'; // default bar color
 
-const barHeight = 40;
+const barHeight = 30;
 
 class BarChart extends Component {
 

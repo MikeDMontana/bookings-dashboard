@@ -35,13 +35,15 @@ class TourSelection extends Component {
 
   render() {
     return (
-      <div>
+      <div className="tourSelection">
+        <div>
         {this.tourDropdownOptions()}
         {this.state.selectedTourFlag && <TourHasBeenSelected
                                           dataset={this.state.dataset}
                                           selectedTour={this.state.selectedTour}
                                           currentSummaryStats={this.state.currentSummaryStats
                                           } />}
+        </div>
       </div>
     );
   }

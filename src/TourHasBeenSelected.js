@@ -67,22 +67,23 @@ class TourHasBeenSelected extends Component {
       <div>
         {this.timeDropdownOptions()}
         {this.createDataArrays()}
+        <div className="d3Elements">
+          <ProgressArc
+            height={260}
+            width={260}
+            innerRadius={100}
+            outerRadius={110}
+            id="d3-arc"
+            backgroundColor='#e6e6e6'
+            foregroundColor='#24867a'
+            duration={2000}
+            percentComplete={this.props.currentSummaryStats['Average Capacity']}
+          />
 
-        <ProgressArc
-          height={300}
-          width={300}
-          innerRadius={100}
-          outerRadius={110}
-          id="d3-arc"
-          backgroundColor='#e6e6e6'
-          foregroundColor='#00ff00'
-          duration={2000}
-          percentComplete={this.props.currentSummaryStats['Average Capacity']}
-        />
-
-        <BarChart
-          dayOfWeekArr={this.state.dayOfWeekArr}
-        />
+          <BarChart
+            dayOfWeekArr={this.state.dayOfWeekArr}
+          />
+        </div>
       </div>
     );
   }
