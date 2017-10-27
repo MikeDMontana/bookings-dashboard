@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import dataset from './capacity_and_booking_lead_time.json';
-import TimeHasBeenSelected from './TimeHasBeenSelected';
 import TourHasBeenSelected from './TourHasBeenSelected';
 
 class TourSelection extends Component {

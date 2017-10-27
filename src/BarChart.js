@@ -2,23 +2,16 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 
 // define dimensions of svg
-const svgWidth = 500;  // width of entire svg
+const svgWidth = 700;  // width of entire svg
 const svgHeight = 500; // height of svg
 const textWidth = 115; // width of text section
 const textGutter = 7; // text/bar spacing
 const barMargin = 2; // bottom margin for bars
 const defaultColor = '#6497ea'; // default bar color
-const altColor = '#bc4545'; // alternative bar color
-
-// any population larger than this is considered big
-const popThreshold = 50;
 
 const barHeight = 40;
 
-class TimeHasBeenSelected extends Component {
-  constructor(props) {
-    super(props);
-  }
+class BarChart extends Component {
 
   componentDidUpdate() {
     return (
@@ -46,15 +39,13 @@ class TimeHasBeenSelected extends Component {
       textAnchor: 'end',
     };
 
-    // props for population bars
+    // props for bars
     const barProps = {
       x: textWidth,
       y: this.yScale(index),
       width: this.xScale(datum['Total Bookings']),
       height: barHeight,
-      fill: datum['Total Bookings'] < popThreshold
-                ? defaultColor
-                : altColor,
+      fill: defaultColor
     };
 
     // props for numbers on end
@@ -64,10 +55,9 @@ class TimeHasBeenSelected extends Component {
       textAnchor: 'end',
     };
 
-    // Be way of making changes below here!
     return (
     <g key={index}>
-        <text {...textProps}>{datum['Day']}</text>
+        <text {...textProps}>{datum['Day']}<br /><em>Total Bookings</em></text>
         <rect {...barProps}/>
         <text {...numberProps}>{datum['Total Bookings']}</text>
     </g>
@@ -78,11 +68,13 @@ class TimeHasBeenSelected extends Component {
 // function to render a bar for given element of dayOfWeekArr array
   render() {
     return (
-      <svg width={svgWidth} height={svgHeight}>
-        {this.props.dayOfWeekArr.map(this.renderBar)}
-      </svg>
+      <div>
+        <svg className="barChartSvg" width={svgWidth} height={svgHeight}>
+          {this.props.dayOfWeekArr.map(this.renderBar)}
+        </svg>
+      </div>
     );
   }
 }
 
-export default TimeHasBeenSelected;
+export default BarChart;

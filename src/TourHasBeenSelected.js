@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TimeHasBeenSelected from './TimeHasBeenSelected';
+import BarChart from './BarChart';
 import ProgressArc from './ProgressArc';
 
 class TourHasBeenSelected extends Component {
@@ -10,7 +10,6 @@ class TourHasBeenSelected extends Component {
 
     this.state={
       departureTimeOptions: {},
-      selectedTimeFlag: false,
       dayOfWeek: {},
       monthOfYear: {},
       weekOfYear: {},
@@ -18,7 +17,6 @@ class TourHasBeenSelected extends Component {
       monthOfYearArr: [],
       weekOfYearArr: [],
       selectedTime: {},
-      largestBookings: []
     };
   }
 
@@ -50,21 +48,17 @@ class TourHasBeenSelected extends Component {
 
   createDataArrays = () => {
     this.state.dayOfWeekArr = [];
-    this.state.largestBookings = [];
 
     for (let key in this.state.dayOfWeek) {
       let newObj = this.state.dayOfWeek[key];
       newObj['Day'] = key;
       if (newObj.hasOwnProperty('Total Bookings')) {
         this.state.dayOfWeekArr.push(newObj);
-        this.state.largestBookings.push(newObj['Total Bookings']);
       } else {
         newObj['Total Bookings'] = 0;
         this.state.dayOfWeekArr.push(newObj);
-        this.state.largestBookings.push(newObj['Total Bookings']);
       }
     }
-    this.state.largestBookings.sort().reverse();
   }
 
   render() {
@@ -86,12 +80,8 @@ class TourHasBeenSelected extends Component {
           percentComplete={this.props.currentSummaryStats['Average Capacity']}
         />
 
-        <TimeHasBeenSelected
-          currentSummaryStats={this.state.currentSummaryStats}
-          selectedTour={this.state.selectedTour}
-          dataset={this.state.dataset}
+        <BarChart
           dayOfWeekArr={this.state.dayOfWeekArr}
-          largestBookings={this.state.largestBookings}
         />
       </div>
     );

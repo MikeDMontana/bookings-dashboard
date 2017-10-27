@@ -1,3 +1,14 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, li {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
 .histogram .bar rect {
   fill: steelblue;
   shape-rendering: crispEdges;
@@ -53,4 +64,8 @@ button {
 .radialPercentage {
   font-size: xx-large;
   font-family: sans-serif;
+}
+
+.barChartSvg {
+  margin-left: 2em;
 }
